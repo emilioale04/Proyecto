@@ -66,7 +66,7 @@ void intro()
 	cout << "\n\nInstrucciones: ";
 
 	setColor(BLACK, WHITE);
-	cout << "\n> Alimenta a la serpiente consumiendo las frutas (%).";
+	cout << "\n> Alimenta a la serpiente consumiendo las frutas (δ).";
 	cout << "\n> Si te chocas con tu propio cuerpo o las paredes, el juego termina.";
 	cout << "\n\n> Muevete con wasd.";
 	cout << "\n> Presiona x para terminar el juego.";
