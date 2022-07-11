@@ -74,7 +74,7 @@ void intro()
 	cout << "\n\n> Buena suerte y disfruta!";
 
 	setColor(BLACK, LBLUE);
-	cout << "\n\nPresiona cualquier letra para continuar...";
+	cout << "\n\nPresiona cualquier tecla para continuar...";
 
 	setColor(BLACK, WHITE);
 
