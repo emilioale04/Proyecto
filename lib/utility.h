@@ -50,8 +50,6 @@ void setColor(int Background, int Text)
 
 void progressbar(int length, int delay, char simb)
 {
-
-
     for (int i=0; i<=100; i++){
         
         int perc=i*length/100;
@@ -68,5 +66,5 @@ void progressbar(int length, int delay, char simb)
 
         Sleep(delay);
     }
-
+    
 }
