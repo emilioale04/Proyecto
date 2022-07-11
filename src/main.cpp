@@ -1,3 +1,13 @@
+/*
+---------------------------------------------
+Dev:		Emilio Armas, Diaz Cristofer
+Subject:	PROYECTO 1B
+			SNAKE GAME
+---------------------------------------------
+
+*/
+
+
 #include <iostream>
 #include <windows.h>
 #include <conio.h>
