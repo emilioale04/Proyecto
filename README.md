@@ -1,4 +1,3 @@
-
 # SNAKE GAME IN C++
 
 Juego de la serpiente básico impreso en consola en C++.
