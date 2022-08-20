@@ -1,6 +1,6 @@
 /*
 ---------------------------------------------
-Dev:		Emilio Armas, Diaz Cristofer
+Dev:		Emilio Armas
 Subject:	PROYECTO 1B
 			SNAKE GAME
 ---------------------------------------------
@@ -21,7 +21,7 @@ using namespace std;
 const int sqrx = 30;
 const int sqry = 25;
 
-char name[10];
+char userName[20];
 
 int delay_ms, score;
 
@@ -57,20 +57,21 @@ void intro()
 	setColor(BLACK, WHITE);
 
 	cout << "\n\nIngresa tu nombre: ";
-	cin >> name;
+	cin.getline(userName, 20, '\n');
+	fflush(stdin);
 
 	system("cls");
-	cout << "Bienvenido, " << name << "!";
+	cout << "Bienvenido, " << userName << "!";
 
 	setColor(BLACK, LGREEN);
 	cout << "\n\nInstrucciones: ";
 
 	setColor(BLACK, WHITE);
-	cout << "\n> Alimenta a la serpiente consumiendo las frutas (δ).";
+	cout << "\n> Alimenta a la serpiente consumiendo las frutas "<< char(235) << ".";
 	cout << "\n> Si te chocas con tu propio cuerpo o las paredes, el juego termina.";
 	cout << "\n\n> Muevete con wasd.";
 	cout << "\n> Presiona x para terminar el juego.";
-	cout << "\n\n> Si terminas el juego:\n\t -> presiona c para comenzar de nuevo.\n\t -> presiona cualquier tecla para salir.";
+	cout << "\n\n> Si terminas el juego:\n\t -> presiona c para comenzar de nuevo.\n\t -> presiona x para salir.";
 	cout << "\n\n> Buena suerte y disfruta!";
 
 	setColor(BLACK, LBLUE);
@@ -121,17 +122,17 @@ void draw()
 			for (int i = 0; i < sqrx; i++)
 			{
 
-				if (i == 0 || i == sqrx - 1)
+				if (i == 0 || i == sqrx - 1)  //imprime marcos
 				{
 					cout << char(35);
 				}
-				else if (snakeH[0] == i && snakeH[1] == j)
+				else if (snakeH[0] == i && snakeH[1] == j) //imprime cabeza serpiente
 				{	
 					setColor(BLACK, LGREEN);
 					cout << char(232);
 					setColor(BLACK, WHITE);
 				}
-				else if (food[0] == i && food[1] == j)
+				else if (food[0] == i && food[1] == j) //imprime comida
 				{
 					setColor(BLACK, LRED);
 					cout << char(235);
@@ -139,8 +140,8 @@ void draw()
 				}
 				else 
 				{
-					bool printspace = true;
-
+					bool printspace = true; 
+					//imprime cola
 					for (int m = 0; m < cola; m++){
 						if(colaX[m] == i && colaY[m] == j){
 							setColor(BLACK, LGREEN);
@@ -158,35 +159,35 @@ void draw()
 		}
 	}
 
-	cout<<"\nJUGADOR: "<<name;
+	cout<<"\nJUGADOR: "<< userName;
 
-	cout<<"\nSCORE: "<<score;
+	cout<<"\nSCORE: "<< score;
 }
 
 void controls()
 {	
-	if (_kbhit())
+	if (_kbhit()) //detecta teclas presionadas
 	{
 		switch (_getch())
 		{
 			case ('a'):
-				if(snakedir == 2)
-				break;
+				if(snakedir == 2) //para que solo pueda ir en una direccion la vez
+					break;
 				snakedir = 1;
 				break;
 			case ('d'):
 				if(snakedir == 1)
-				break;
+					break;
 				snakedir = 2;
 				break;
 			case ('w'):
-				if(snakedir == 4)
-				break;
+				if(snakedir == 4) 
+					break;
 				snakedir = 3;
 				break;
 			case ('s'):
 				if(snakedir == 3)
-				break;
+					break;
 				snakedir = 4;
 				break;
 			case ('x'):
@@ -199,7 +200,7 @@ void controls()
 
 void logic()
 {
-
+	//generar cola
 	int colaX1, colaY1, colaX2, colaY2;
 
 	colaX1 = colaX[0];
@@ -219,6 +220,7 @@ void logic()
 		colaY1 = colaY2;
 	}
 
+	//direcciones de la cola
 	switch(snakedir)
 	{
 		case(1):
@@ -239,10 +241,12 @@ void logic()
 			break;
 	}
 
+	//choques con las paredes
 	if(snakeH[0] == 0 || snakeH[0] == sqrx-1 || snakeH[1] == 0 || snakeH[1] == sqry-1){
 		finish = true;
 	}
 
+	//choques con la cola
 	for (int j = 0; j < cola; j++){
 		if (colaX[j] == snakeH[0] && colaY[j] == snakeH[1])
 		finish = true;
@@ -258,6 +262,7 @@ void logic()
 		score = score + 10;
 	}
 
+	//aumentar la velocidad segun el tamano
 	switch(score){
 		case(0):
 			delay_ms = 25;
@@ -290,7 +295,7 @@ void end(){
 	gotoxy(sqrx/2-8, sqry/2-2);
 	cout<<"FINAL SCORE: "<<score;
 
- 	setColor(BLACK, DGREY);
+ 	setColor(BLACK, LGREY);
 	gotoxy(sqrx/2-11, sqry/2+1);
 	cout<<"Press c to play again";
 	gotoxy(sqrx/2-11, sqry/2+2);
@@ -308,10 +313,10 @@ int main()
 	intro();
 	again:
 	srand(time(0)); // seed para rand()
-	inic();
+	inic(); 
 	system("cls");
 
-	while (!finish)
+	while (!finish) //bucle mientras se juegue
 	{
 		draw();
 		controls();
@@ -325,7 +330,7 @@ int main()
 	
 	bool pressXC = false;
 
-	while(!pressXC)
+	while(!pressXC) //volver a jugar o salir
 	{
 		switch(_getch()){
 			case('c'):
